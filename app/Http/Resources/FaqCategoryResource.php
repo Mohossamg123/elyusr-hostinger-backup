@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class FaqCategoryResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'name_ar' => $this->name_ar,
+            'name_en' => $this->name_en,
+            'slug' => $this->slug,
+            'is_active' => $this->is_active,
+            'sort_order' => $this->sort_order,
+
+            'faqs_count' => $this->when(
+                isset($this->faqs_count),
+                $this->faqs_count
+            ),
+
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
+    }
+}
